@@ -1,0 +1,17 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t benyoo5222jae/fib-client -f Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true benyoo5222jae/fib-client npm run test
+
+after_sucess:
+  - docker build -t benyoo5222jae/multi-fib-client ./client
+  - docker build -t benyoo5222jae/mutli-fib-router ./nginx
+  - docker build -t benyoo5222jae/multi-fib-server ./server
+  - docker build -t benyoo5222jae/mutli-fib-worker ./worker
+
+deploy:

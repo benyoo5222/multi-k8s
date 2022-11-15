@@ -1,0 +1,19 @@
+# Dev docker file - This means that we want to build the image using node and not have to worry about nginx as the file router
+# Base image
+FROM node:16-alpine
+
+# Working directory
+WORKDIR /app
+
+# Copy over the package json
+COPY ./package.json ./
+# Install dependencies
+RUN npm install 
+
+# Copy over all of the react files. This step is uncessary in dev but it's good practice
+# It's uncessary because we will create volumes and attach it to the container
+# The volume will point the host/local machine react folder; So any chages in local will reflect in real time for the container
+COPY ./ ./
+
+# Lastly we give a startup command
+CMD ["npm", "run", "start"]

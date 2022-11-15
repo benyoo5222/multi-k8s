@@ -1,0 +1,12 @@
+# We want to create a node js web server (API layer)
+# This means that we are going to create simply follow the same steps of installing dep, copying files over
+FROM node:16-alpine
+
+WORKDIR /app
+
+COPY ./package.json ./
+RUN npm install 
+
+COPY ./ ./
+
+CMD ["npm", "run", "dev"]
