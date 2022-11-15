@@ -20,3 +20,15 @@ after_sucess:
   - docker push benyoo5222jae/mutli-fib-router
   - docker push benyoo5222jae/multi-fib-server
   - docker push benyoo5222jae/mutli-fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ca-central-1"
+  app: "Multi-container"
+  end: "Multicontainer-env"
+  bucket_name: "elasticbeanstalk-ca-central-1-423958764716"
+  bucker_path: "Multi-container"
+  on:
+    branch: main
+  access_key_id: $ACCESS_KEY_ID
+  secret_access_key: $SECRET_KEY
