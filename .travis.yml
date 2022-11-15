@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t benyoo5222jae/fib-client -f Dockerfile.dev ./client
+  - docker build -t benyoo5222jae/fib-client -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true benyoo5222jae/fib-client npm run test
