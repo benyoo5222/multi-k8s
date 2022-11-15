@@ -9,7 +9,7 @@ services:
     image: benyoo5222jae/multi-fib-client
 
   web-server:
-    image: benyoo5222jae/multi-fib-client
+    image: benyoo5222jae/multi-fib-server
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
