@@ -15,7 +15,7 @@ after_sucess:
   - docker build -t benyoo5222jae/mutli-fib-worker ./worker
   # Now we need to push the newly built images to docker hub
   # To do so, we need to login to docker hub using "docker login" command
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push benyoo5222jae/multi-fib-client
   - docker push benyoo5222jae/mutli-fib-router
   - docker push benyoo5222jae/multi-fib-server
