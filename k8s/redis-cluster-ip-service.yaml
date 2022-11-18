@@ -1,0 +1,15 @@
+# Networking to allow other objects to interact with redis
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-cluster-ip-service
+spec:
+  type: ClusterIP
+  # Select the pods that will use this networking rule
+  selector:
+    component: redis
+  ports:
+    # Each port will specify the target port (the port of the container exposed on the pods)
+    # and the port used by other objects to reach the target port
+    - port: 6379
+      targetPort: 6379

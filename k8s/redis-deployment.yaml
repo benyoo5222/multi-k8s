@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+spec:
+  # number of pods within the deployment object
+  replicas: 1
+  # Select the pods for replication
+  selector:
+    matchLabels:
+      component: redis
+  # Define the pod using template
+  template:
+    # Same as pod config file; start with metadata
+    metadata:
+      labels:
+        component: redis
+    # Specification of the pod
+    spec:
+      containers:
+        - name: redis-db
+          image: redis
+          # Expose port that the container will use for incoming traffic to the redis server
+          ports:
+            - containerPort: 6379

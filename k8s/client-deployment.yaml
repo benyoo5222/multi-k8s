@@ -1,0 +1,31 @@
+# We want to create Kubernetes deployment object file for the react (clinet) app
+# We want to use the image that we have already created for the frontend application
+# apps/v1 version has the Deployment object
+apiVersion: apps/v1
+kind: Deployment
+# Metadata - This will have the name of the deployment object that will be used to create a unique key combination with the Deployment object type
+metadata:
+  name: client-deployment
+spec:
+  # First we specify how many pods object that we want to have
+  replicas: 3
+  # Next, we use the labels section to tell master node which pods are being replicated
+  selector:
+    matchLabels:
+      component: frontend
+  # Now we create the template section - This is what is used to create the pod
+  template:
+    # Metada with the labels - this is how the deployment object (and master) is able to select the pods for updating
+    metadata:
+      labels:
+        component: frontend
+    spec:
+      # Lastly, we define the containers we want in the pod
+      containers:
+        # We use the - chracters to list out an array of containers we want running within the pod
+        # Each container needs and name + image used to build the container
+        # Also we are going to want to expose the container's port so that other containers/pods can interact with it
+        - name: client
+          image: benyoo5222jae/multi-client
+          ports:
+            - containerPort: 3000

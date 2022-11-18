@@ -1,0 +1,33 @@
+# First we define the api version; apps/v1 will have the deplyoment object
+apiVersion: apps/v1
+kind: Deployment
+# Metadata to give this object a name for PK
+metadata:
+  name: worker-deployment
+# Spec of this deployment object
+spec:
+  # Number of replicas for the pod we defined
+  replicas: 1
+  # A way to select the pods that belong to this deployment object
+  selector:
+    matchLabels:
+      component: worker
+  # Template for the pod
+  template:
+    # Define the Pod - metada; name of the pod
+    metadata:
+      labels:
+        component: worker
+    # Specification of the pod
+    spec:
+      # List out containers
+      containers:
+        # Each container needs a name, image
+        - name: redis-fib-worker
+          image: benyoo5222jae/mutli-fib-worker
+          # No need to expose a port; It will use an epimeral port to talk to other pods in other objects.
+          env:
+            - name: REDIS_HOST
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: "6379"
